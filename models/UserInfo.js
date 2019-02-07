@@ -8,19 +8,19 @@ var UserSchema = new Schema ({
         required: true,
         unique: [true, "Title cannot be a duplicate"]
     },
-    Password: {
+    password: {
         type: String,
         required:true
     },
-    FirstName: {
+    firstName: {
         type: String,
         required:true
     },
-    LastName: {
+    lastName: {
         type: String,
         required:true
     },
-    Saved: {
+    saved: {
         type: Boolean,
         default: false
     },

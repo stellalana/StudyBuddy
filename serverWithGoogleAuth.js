@@ -5,7 +5,26 @@ const app = express();
 const routes = require("./routes");
 const mongoose = require("mongoose");
 const socket = require("socket.io");
+const passport = require("passport");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const keys = require("./config/keys");
 
+
+passport.use(new GoogleStrategy({
+  clientID: keys.googleAuthClientID,
+  clientSecret: keys.googleAuthSecret,
+  callbackURL: "http://localhost:3000/getQuestions"
+}, (accessToken, refreshToken, profile, done) => {
+console.log(accessToken)
+console.log(refreshToken);
+console.log(profile);
+}))
+
+app.get('/auth/google', passport.authenticate('google', {
+  scope: ['profile', 'email']
+}))
+
+app.get('/getQuestions', passport.authenticate('google'))
 
 
 // Define middleware here
