@@ -1,0 +1,54 @@
+import React, { Component } from "react";
+import { MyContext } from "../../MyContext";
+import API from "../../utils/API";
+
+
+class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.userInput = React.createRef();
+    this.passwordInput = React.createRef();
+
+    this.state = {
+     userNames: [],
+     passwords: []
+
+    };
+  }
+
+
+  render() {
+    return (
+      <MyContext.Consumer>
+        {value => {
+          const { currentUser, password, logIn, logOut } = value;
+          return currentUser ? (
+            <span style={{paddingRight: "10px"}}>
+              <span style={{padding: "0 10px", fontSize:"25px" }}> {currentUser}</span>
+              <button className="btn-primary" onClick={logOut}>Log Out</button>
+            </span>
+          ) : (
+            <div>
+              <form style={{paddingRight: "10px"}}
+              >
+                <input style={{borderRadius:"5%"}} placeholder="Username" ref={this.userInput} />
+                <input style={{borderRadius:"5%"}} placeholder="Password" ref={this.passwordInput} />
+                <button
+                   className="btn-primary" 
+                  onClick={() => {
+                    logIn(this.userInput.current.value, this.passwordInput.current.value);
+                  }}
+                >
+                  Log In
+                </button>
+              </form>
+            </div>
+          );
+        }}
+      </MyContext.Consumer>
+    );
+  }
+}
+
+export default LoginForm;
