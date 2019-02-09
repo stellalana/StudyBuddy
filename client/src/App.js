@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Provider } from "./MyContext";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GetQuestions from "./pages/GetQuestions";
 import NoMatch from "./pages/NoMatch";
@@ -10,7 +11,9 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav />
+        <Provider>
+            <Nav />
+        </Provider>
           <Switch>
             <Route exact path="/" component={GetQuestions} />
             <Route exact path="/getQuestions" component={GetQuestions} />

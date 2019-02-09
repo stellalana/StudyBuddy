@@ -3,33 +3,38 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
-import { QuestionList, QuestionListItem } from "../components/QuestionList";
+import { BookList, BookListItem } from "../components/Booklist";
 import { Input, FormBtn } from "../components/Form";
 
 
-class GetQuestions extends Component {
+
+
+class Books extends Component {
   state = {
     allQuestions: [],
     question: "",
     answer: "",
   };
 
-  componentDidMount() {
-    API.getUsers().then(res => console.log(res));
-    this.loadQuestions();
-  }
 
-  loadQuestions = () => {
-    API.getQuestions()
+
+  //search google api
+  searchGoogle = (query) => {
+    API.search(query).then(res => this.setState({ books: res.data.items, description: "" }))
+    .then(()=>console.log(this.state.books)).catch(err => console.log(err));
+  };
+
+  loadBooks = () => {
+    API.getBooks()
       .then(res =>
-        this.setState({ allQuestions: res.data })
+        this.setState({ books: res.data, description: "" })
       )
       .catch(err => console.log(err));
   };
 
-  deleteQuestion = id => {
-    API.deleteQuestion(id)
-      .then(() => this.loadQuestions())
+  deleteBook = id => {
+    API.deleteBook(id)
+      .then(res => this.loadBooks())
       .catch(err => console.log(err));
   };
 
@@ -39,28 +44,58 @@ class GetQuestions extends Component {
     console.log(event.target.value);
   }
 
-  //Removes deleted questions from state. Do we need this?
-  handleDelete = id => {
+  handleDelete=(id)=> {
     console.log(id);
-    const questions = this.state.questions.filter(question => question.id !== id);
-    this.setState({ allQuestions: questions });
+    const books = this.state.books.filter(book => book.id !== id);
+    this.setState({ books });
   }
-  
-  handleSave = () => {
-    const newQuestion = {
-      question: this.state.question,
-      answer: this.state.answer
+  handleSave=(id)=> {
+    console.log(id);
+    const saveIt = this.state.books.filter(book=> book.id === id);
+    const sendIt = {
+      title: saveIt[0].volumeInfo.title,
+      authors: saveIt[0].volumeInfo.authors,
+      description: saveIt[0].volumeInfo.description,
+      image: saveIt[0].volumeInfo.imageLinks.thumbnail,
+      link: saveIt[0].volumeInfo.previewLink
     };
-    console.log(newQuestion);
-    API.saveQuestion(newQuestion)
-    .then(() => this.loadQuestions())
+
+    API.saveBook(sendIt).then(res => this.handleDelete(id))
+    .catch(err => console.log(err));
+  }
+
+  ///////////////////////////save question////////////////////////
+  handleQuestion=()=> {
+    console.log("started");
+    const sendIt = {
+      question: this.state.question,
+      answer: this.state.answer,
+    };
+
+    API.saveQuestion(sendIt).then(res => console.log(res))
+    .catch(err => console.log(err));
+  }
+
+  ////////////////////////save user//////////////////////////////
+  saveUser=()=> {
+    console.log("started................");
+    const sendIt = {
+      userName: "Roger",
+      password: "1234",
+      firstName: "Roger",
+      lastName: "Roger",
+      saved: true,
+      createDate: new Date(Date.now())
+    }
+
+    API.saveUser(sendIt).then(res => console.log(res))
     .catch(err => console.log(err));
   }
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.question && this.state.answer) {
-      this.handleSave();
+    if (this.state.description) {
+      this.searchGoogle(this.state.description);
     }
   };
 
@@ -89,7 +124,7 @@ class GetQuestions extends Component {
               />
               <FormBtn
                 disabled={!(this.state.question) || !(this.state.answer)}
-                onClick={this.handleFormSubmit}
+                onClick={this.handleQuestion}
               >
                 Submit
               </FormBtn>
@@ -97,21 +132,25 @@ class GetQuestions extends Component {
           </Col>
           <Col size="md-12 sm-12">
             {this.state.allQuestions.length ? (
-              <QuestionList>
-              {this.state.allQuestions.map(question=> (
+              <BookList>
+              {this.state.books.map(book=> (
       
-                <QuestionListItem
-                  key = {question._id}
-                  id = {question._id}
-                  question = {question.question}
-                  answer = {question.answer}
-                  deleteQuestion = {this.deleteQuestion}
+                <BookListItem
+                  key = {book.id}
+                  id = {book.id}
+                  title = {book.volumeInfo.title}
+                  href = {book.volumeInfo.infoLink}
+                  desc = {book.volumeInfo.description}
+                  authors = {book.volumeInfo.authors}
+                  thumb = {book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://placehold.it/300x300"} 
+                  handleDelete = {this.handleDelete} 
+                  handleSave = {this.handleSave}     
                   />
                 )
                 
                 )}
 
-            </QuestionList>
+            </BookList>
             ) : (
               <h3>No Questions Entered Yet!</h3>
             )}
@@ -122,4 +161,4 @@ class GetQuestions extends Component {
   }
 }
 
-export default GetQuestions;
+export default Books;

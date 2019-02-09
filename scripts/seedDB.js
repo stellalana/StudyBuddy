@@ -35,29 +35,30 @@ const questionSeed = [
 
 const userSeed = [
   {
-    Username: "JimmyG",
-    password: "9ersAllTheWay",
-    firstName: "Jimmy",
-    lastName: "Garoppalo",
+    userName: "Tim",
+    password: "1234",
+    firstName: "Tim",
+    lastName: "Nagorski",
+    saved: true,
+    createDate: new Date(Date.now())
+  },
+{
+    userName: "Stella",
+    password: "1234",
+    firstName: "Stella",
+    lastName: "Stella",
     saved: true,
     createDate: new Date(Date.now())
   },
   {
-    Username: "SamIam",
-    password: "Nyjets#superbowl",
-    firstName: "Sam",
-    lastName: "Darnold",
-    saved: true,
-    createDate: new Date(Date.now())
-  },
-  {
-    Username: "TdMaker",
-    password: "BakerTdMaker",
-    firstName: "Baker",
-    lastName: "Mayfield",
-    saved: true,
-    createDate: new Date(Date.now())
-  }
+      userName: "Zeke",
+      password: "1234",
+      firstName: "Zeke",
+      lastName: "Zeke",
+      saved: true,
+      createDate: new Date(Date.now())
+    }
+  
   
 ];
 

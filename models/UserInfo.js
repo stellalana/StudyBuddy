@@ -3,10 +3,9 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema ({
-    UserName: {
+    userName: {
         type: String,
         required: true,
-        unique: [true, "Title cannot be a duplicate"]
     },
     password: {
         type: String,
