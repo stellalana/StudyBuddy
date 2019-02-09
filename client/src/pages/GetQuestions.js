@@ -3,13 +3,11 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
-import { BookList, BookListItem } from "../components/Booklist";
+import { QuestionList, QuestionListItem } from "../components/QuestionList";
 import { Input, FormBtn } from "../components/Form";
 
 
-
-
-class Books extends Component {
+class GetQuestions extends Component {
   state = {
     allQuestions: [],
     question: "",
@@ -18,26 +16,20 @@ class Books extends Component {
 
   componentDidMount() {
     API.getUsers().then(res => console.log(res));
+    this.loadQuestions();
   }
 
-
-  //search google api
-  searchGoogle = (query) => {
-    API.search(query).then(res => this.setState({ books: res.data.items, description: "" }))
-    .then(()=>console.log(this.state.books)).catch(err => console.log(err));
-  };
-
-  loadBooks = () => {
-    API.getBooks()
+  loadQuestions = () => {
+    API.getQuestions()
       .then(res =>
-        this.setState({ books: res.data, description: "" })
+        this.setState({ allQuestions: res.data })
       )
       .catch(err => console.log(err));
   };
 
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
+  deleteQuestion = id => {
+    API.deleteQuestion(id)
+      .then(() => this.loadQuestions())
       .catch(err => console.log(err));
   };
 
@@ -47,30 +39,28 @@ class Books extends Component {
     console.log(event.target.value);
   }
 
-  handleDelete=(id)=> {
+  //Removes deleted questions from state. Do we need this?
+  handleDelete = id => {
     console.log(id);
-    const books = this.state.books.filter(book => book.id !== id);
-    this.setState({ books });
+    const questions = this.state.questions.filter(question => question.id !== id);
+    this.setState({ allQuestions: questions });
   }
-  handleSave=(id)=> {
-    console.log(id);
-    const saveIt = this.state.books.filter(book=> book.id === id);
-    const sendIt = {
-      title: saveIt[0].volumeInfo.title,
-      authors: saveIt[0].volumeInfo.authors,
-      description: saveIt[0].volumeInfo.description,
-      image: saveIt[0].volumeInfo.imageLinks.thumbnail,
-      link: saveIt[0].volumeInfo.previewLink
+  
+  handleSave = () => {
+    const newQuestion = {
+      question: this.state.question,
+      answer: this.state.answer
     };
-
-    API.saveBook(sendIt).then(res => this.handleDelete(id))
+    console.log(newQuestion);
+    API.saveQuestion(newQuestion)
+    .then(() => this.loadQuestions())
     .catch(err => console.log(err));
   }
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.description) {
-      this.searchGoogle(this.state.description);
+    if (this.state.question && this.state.answer) {
+      this.handleSave();
     }
   };
 
@@ -107,25 +97,21 @@ class Books extends Component {
           </Col>
           <Col size="md-12 sm-12">
             {this.state.allQuestions.length ? (
-              <BookList>
-              {this.state.books.map(book=> (
+              <QuestionList>
+              {this.state.allQuestions.map(question=> (
       
-                <BookListItem
-                  key = {book.id}
-                  id = {book.id}
-                  title = {book.volumeInfo.title}
-                  href = {book.volumeInfo.infoLink}
-                  desc = {book.volumeInfo.description}
-                  authors = {book.volumeInfo.authors}
-                  thumb = {book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "https://placehold.it/300x300"} 
-                  handleDelete = {this.handleDelete} 
-                  handleSave = {this.handleSave}     
+                <QuestionListItem
+                  key = {question._id}
+                  id = {question._id}
+                  question = {question.question}
+                  answer = {question.answer}
+                  deleteQuestion = {this.deleteQuestion}
                   />
                 )
                 
                 )}
 
-            </BookList>
+            </QuestionList>
             ) : (
               <h3>No Questions Entered Yet!</h3>
             )}
@@ -136,4 +122,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default GetQuestions;
