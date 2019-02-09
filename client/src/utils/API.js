@@ -20,7 +20,7 @@ export default {
     return axios.post("/api/userInfo", userData);
   },
 
-  // Gets all users from Database
+  // Gets all questions from Database
   getQuestions: function() {
     return axios.get("/api/questions");
   },
