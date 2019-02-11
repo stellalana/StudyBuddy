@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { MyContext } from "../../MyContext";
-import API from "../../utils/API";
 
 
 class LoginForm extends Component {
@@ -10,11 +9,7 @@ class LoginForm extends Component {
     this.userInput = React.createRef();
     this.passwordInput = React.createRef();
 
-    this.state = {
-     userNames: [],
-     passwords: []
-
-    };
+    this.state = {};
   }
 
 
@@ -22,7 +17,7 @@ class LoginForm extends Component {
     return (
       <MyContext.Consumer>
         {value => {
-          const { currentUser, password, logIn, logOut } = value;
+          const { currentUser, logIn, logOut } = value;
           return currentUser ? (
             <span style={{paddingRight: "10px"}}>
               <span style={{padding: "0 10px", fontSize:"25px" }}> {currentUser}</span>
