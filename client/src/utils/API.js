@@ -20,6 +20,11 @@ export default {
     return axios.post("/api/userInfo", userData);
   },
 
+  updateUserQuestion: function(id, userData) {
+    console.log(userData);
+    return axios.put("/api/userInfo" + id, userData);
+  },
+
   // Gets all questions from Database
   getQuestions: function() {
     return axios.get("/api/questions");

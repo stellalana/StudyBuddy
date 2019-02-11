@@ -7,8 +7,10 @@ class Provider extends Component {
   state = {
     currentUser: null,
     password: null,
+    currentId: null,
     userNames: [],
-    passwords: []
+    passwords: [],
+    userIds: []
   };
 
   componentDidMount() {
@@ -18,41 +20,63 @@ class Provider extends Component {
   userInfo = () => {
     var allNames = [];
     var allPasswords = [];
+    var userids = [];
     API.getUsers()
     .then((res) => 
     {for (var i = 0; i < res.data.length; i++) 
-      //{console.log(res.data[i].Username)}})};
       {
         allNames.push(res.data[i].userName);
         allPasswords.push(res.data[i].password);
+        userids.push(res.data[i]._id);
       }})
-      .then(this.setState({ userNames:allNames, passwords: allPasswords}))
-      .then(()=> console.log(this.state))
+      .then(this.setState({ userNames:allNames, passwords: allPasswords, userIds:userids}))
+      .then(()=> console.log(this.state)) ///comment out when done!!!!!!!!!!!!!!11
       .catch(err => console.log(err));
     };
 
-  logIn = (name, password) => {
-    
+  logIn = (name, password) => { 
     var where = this.state.userNames.indexOf(name);
     if (where > -1 && this.state.passwords[where] === password) {
-      console.log(this.state.userNames.indexOf(name));
-      console.log("HI");
-      this.setState({ currentUser: name, password: password });
+      var id = this.state.userIds[where];
+      
+      this.setState({ currentUser: name, password: password, currentId: id });
+      
     }
     else {
       console.log("invalid password");
     }
+    console.log(this.state);
   };
 
-  logOut = () => this.setState({ currentUser: null, password: null });
+  logOut = () => {
+    console.log(this.state);
+    this.setState({ currentUser: null, password: null });}
+
+  handleQuestion=(question, answer)=> {
+    console.log(this.state.currentId);
+      const sendIt = {
+        question: question,
+        answer: answer
+      };
+      var tempID = "5c5ecc4c2aac9312fcb3f439"
+      API.saveQuestion(sendIt)
+      //.then(res => console.log(res.data._id))
+      //.then(res=>API.updateUserQuestion(tempID, {questions:res.data._id})) //FINISH TO UPDATE USER WITH ID FOR QUESTION
+      .then(this.setState({ question:"", answer: ""}))
+      .then(res =>API.getQuestions().then(res => this.setState({ allQuestions : res.data })))
+      .catch(err => console.log(err));
+    }
+  
   render() {
     return (
       <MyContext.Provider
         value={{
+          currentId: this.state.currentId,
           currentUser: this.state.currentUser,
           password: this.state.password,
           logIn: this.logIn,
-          logOut: this.logOut
+          logOut: this.logOut,
+          handleQuestion: this.handleQuestion
         }}
       >
         {this.props.children}
