@@ -63,8 +63,7 @@ render() {
           <Col size="md-12">
       
             <Jumbotron>
-              <h1>Study Buddy</h1>
-              <h3>Answer the questions!</h3>
+              <h1 class="jumboTitle">Study Buddy</h1>
             </Jumbotron>
             {this.shuffle(this.state.allQuestions).filter(i=>i.active !== false).slice(0, 1).map(i=> (
             <div className="questionCard" key={i._id+"div"}>

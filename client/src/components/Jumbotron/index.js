@@ -1,4 +1,5 @@
 import React from "react";
+import './jumbotron.css';
 
 const styles = {
   jumbo: {
@@ -13,7 +14,6 @@ const styles = {
 function Jumbotron({ children }) {
   return (
     <div
-      style={styles.jumbo}
       className="jumbotron"
     >
       {children}
