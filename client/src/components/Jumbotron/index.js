@@ -3,7 +3,7 @@ import React from "react";
 const styles = {
   jumbo: {
     backgroundColor: 'white',
-    height: 300, clear: "both", textAlign: "center"
+    height: 200, clear: "both", textAlign: "center"
   },
   heading: {
 
