@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
-import { BookList, BookListItem } from "../components/Booklist";
+import { QuestionList, QuestionListItem } from "../components/QuestionList";
 import { Input, FormBtn } from "../components/Form";
 import { Provider, MyContext } from "../MyContext";
 
 
-class Books extends Component {
+class Questions extends Component {
   constructor(props) {
     super(props);
   
@@ -114,10 +114,10 @@ class Books extends Component {
           </Col>
           <Col size="md-12 sm-12">
             {this.state.allQuestions.length ? (
-              <BookList>
+              <QuestionList>
               {this.state.allQuestions.map(ques=> (
               
-                <BookListItem
+                <QuestionListItem
                   key = {ques._id}
                   id = {ques._id}
                   answer = {ques.answer}
@@ -127,7 +127,7 @@ class Books extends Component {
                 
                 )
                 )}
-            </BookList>
+            </QuestionList>
             ) : (
               <h3>No Questions Entered Yet!</h3>
             )}
@@ -138,4 +138,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default Questions;

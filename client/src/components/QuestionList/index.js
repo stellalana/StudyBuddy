@@ -12,8 +12,8 @@ export function QuestionList({ children }) {
 // RecipeListItem renders a bootstrap list item containing data from the recipe api call
 export function QuestionListItem({
   id,
-  question,
   answer,
+  question,
   deleteQuestion
 }) {
 
@@ -21,8 +21,8 @@ export function QuestionListItem({
     <li className="list-group-item">
       <Container>
         <Row>
-          <Col size="sm-12">
-            <p>Question: {question}</p>
+          <Col size="xs-8 sm-9">
+            <h3>{question}</h3>
             <p>Answer: {answer}</p>
           </Col>
         </Row>
