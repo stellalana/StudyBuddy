@@ -79,8 +79,7 @@ class Books extends Component {
           <Col size="md-12">
       
             <Jumbotron>
-              <h1>Study Buddy</h1>
-              <h3>Enter A Question!</h3>
+              <h1 class="jumboTitle">Study Buddy</h1>
             </Jumbotron>
             <form>
               <Input
