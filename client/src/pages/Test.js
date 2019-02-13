@@ -7,6 +7,7 @@ import { Provider, MyContext } from "../MyContext";
 import { FormBtn } from "../components/Form";
 
 
+
 class Test extends Component {
   constructor(props) {
     super(props);
@@ -67,6 +68,7 @@ render() {
             <Jumbotron>
               <h1 class="jumboTitle">Study Buddy</h1>
             </Jumbotron>
+            
             {this.shuffle(this.state.allQuestions).filter(i=>i.active !== false).slice(0, 1).map(i=> (
             <div className="questionCard" key={i._id+"div"}>
 
