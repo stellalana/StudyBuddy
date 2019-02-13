@@ -7,6 +7,7 @@ import { Provider, MyContext } from "../MyContext";
 import { FormBtn } from "../components/Form";
 
 
+
 class Test extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,9 @@ class Test extends Component {
     allQuestions: [],
     shuffledQuestions: [],
     question: "",
-    answer: ""
+    answer: "",
+    correct: 0,
+    wrong: 0
   };
 }
 
@@ -36,25 +39,25 @@ shuffle = (a) => {
      return a
     }
 
-checkAnswer = (userAnswer, correctAnswer) => {
+checkAnswer = (userAnswer, correctAnswer, id) => {
+  var where;
    if (userAnswer === correctAnswer) {
      console.log("Correct!")
-     console.log(this.state.allQuestions[0].question);
+     for (var i = 0; i < this.state.allQuestions.length; i++) {
+       if (id === this.state.allQuestions[i]._id) {
+         where = i;
+       }
+     }
      var tempState = this.state;
-     console.log(tempState.allQuestions[0].question);
-     tempState.allQuestions[0].active = false;
-     console.log(tempState.allQuestions);
-     console.log(this.state.allQuestions);
+     tempState.allQuestions[where].active = false;
      this.setState({ allQuestions : tempState.allQuestions });
    }
    else {
      console.log("Wrong");
      console.log(this.state.allQuestions[0].question);
+     this.setState({ allQuestions : this.state.allQuestions})
    }
 }
-
-
-    
 
 render() {
     return (
@@ -65,6 +68,7 @@ render() {
             <Jumbotron>
               <h1 class="jumboTitle">Study Buddy</h1>
             </Jumbotron>
+            
             {this.shuffle(this.state.allQuestions).filter(i=>i.active !== false).slice(0, 1).map(i=> (
             <div className="questionCard" key={i._id+"div"}>
 
@@ -73,26 +77,17 @@ render() {
               question={i.question}
               >
               </QuestionCard>
-              
                 <input key={i._id+"Input"} style={{borderRadius:"5%"}} placeholder="Answer Question" ref={this.userAnswer} />
-
-                <FormBtn
+              <FormBtn
                 key={i._id+"Button"}
-                onClick={()=>this.checkAnswer(this.userAnswer.current.value, i.answer)}
-              >Answer
+                onClick={()=>this.checkAnswer(this.userAnswer.current.value, i.answer, i._id)}
+                >Answer
               </FormBtn>
 
             </div>
 
             ))}
             
-              <Provider>
-              <MyContext.Consumer>
-              {({ currentId }) => (
-              
-              <div>{currentId}</div>)}
-            </MyContext.Consumer>
-            </Provider>
             
           </Col>
           <Col size="md-12 sm-12">
