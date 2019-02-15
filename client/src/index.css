@@ -1,5 +1,82 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #acd0b6;
+}
+
+.createIntro {
+  text-align: center;
+  font-family: 'Merriweather', serif;
+  margin-top: 25px;
+  color: #40676E;
+}
+.col-cardsets {
+  align-content: center;
+}
+
+.storedQuestion,
+.storedAnswer {
+  font-family: "Merriweather", serif;
+  border-bottom-style: solid;
+}
+.cardSetQ {
+  width: 48%;
+  float: left;
+}
+.cardSetA {
+  width: 48%;
+  margin: 0;
+  float: right;
+}
+/* .description {
+  display: inline block;
+} */
+
+.headerTerm, .headerDefinition {
+  font-size: 12px;
+  color: #40676E;
+  margin-top: 5px;
+  font-weight: bold;
+  letter-spacing: .5px;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.col-md-12 {
+  padding: 0;
+}
+.col-sm-12 {
+  padding: 0;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.form-group {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 7px;
+}
+
+.col-xs-8 {
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 7px;
+  text-align: center;
+}
+
+.save-btn {
+  margin: 0 auto;
+}
+
+.list-group {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+
+.list-group-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+}
