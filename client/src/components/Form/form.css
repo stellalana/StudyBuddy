@@ -2,6 +2,19 @@
     margin:0 auto;
     display:block;
     margin-top: 5px;
+    background-color: #40676E;
+    border-style: solid;
+    border-color: #40676E;
+    color: #FFFFFF;
+}
+.btn-success:hover {
+    margin:0 auto;
+    display:block;
+    margin-top: 5px;
+    background-color: #FFFFFF;
+    border-style: solid;
+    border-color: #40676E;
+    color: #40676E;
 }
 
 .btn-delete {
