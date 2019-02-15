@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "./utils/API";
 
+
 const MyContext = React.createContext();
 
 class Provider extends Component {
@@ -11,12 +12,15 @@ class Provider extends Component {
     userNames: [],
     passwords: [],
     userIds: [],
-    auth: false
+    auth: null
   };
+
+  
 
   componentDidMount() {
     this.userInfo();
   }
+
 
   userInfo = () => {
     var allNames = [];
@@ -35,21 +39,19 @@ class Provider extends Component {
       .catch(err => console.log(err));
     };
 
-  logIn = async (name, password) => { 
-    
-    console.log(name);
+
+  logIn = (name, password) => { 
     var where = this.state.userNames.indexOf(name);
     if (where > -1 && this.state.passwords[where] === password) {
       var id = this.state.userIds[where];
-      console.log(this.state);
-      await this.setState({ currentUser: name, password: password, currentId: id, auth: true },()=>console.log(this.state.auth));
+      
+      this.setState({ currentUser: name, password: password, currentId: id, auth: true });
       
     }
     else {
       console.log("invalid password");
-      this.setState({ currentUser: null });
     }
-
+    console.log(this.state);
   };
 
   logOut = () => {
@@ -81,9 +83,7 @@ class Provider extends Component {
           logIn: this.logIn,
           logOut: this.logOut,
           handleQuestion: this.handleQuestion,
-          auth: this.state.auth,
-          currentId: this.state.currentId
-        
+          auth: this.state.auth
         }}
       >
         {this.props.children}

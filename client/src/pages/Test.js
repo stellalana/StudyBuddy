@@ -7,6 +7,7 @@ import { Provider, MyContext } from "../MyContext";
 import { FormBtn } from "../components/Form";
 import Score from "../components/Score";
 import {Animated} from "react-animated-css";
+import Nav from "../components/Nav";
 
 
 class Test extends Component {
@@ -97,87 +98,101 @@ wrongAnswer = (question, answer, id) => {
 
 render() {
     return (
-      <Container fluid >
-      {this.state.notDone ? (
-        <Row>
-          <Col size="md-12">
-          
-            <Jumbotron>
-              <h1>Study Buddy</h1>
-              <h3>Answer the questions!</h3>
-            </Jumbotron>
-            <Score 
-            correct={this.state.correct}
-            wrong={this.state.wrong}
-            />
+      <Container fluid>
+       <Nav/>
+       <MyContext.Consumer>
+       {({ auth }) => (
+         auth ? (
+     
+         <div>
+          {this.state.notDone ? (
+            <Row>
+              <Col size="md-12">
+              
+                <Jumbotron>
+                  <h1>Study Buddy</h1>
+                  <h3>Answer the questions!</h3>
+                </Jumbotron>
+                <Score 
+                correct={this.state.correct}
+                wrong={this.state.wrong}
+                />
 
-           {this.state.rightScreen ? (    
+              {this.state.rightScreen ? (    
 
-            <div className="quesWrap" style={{width:"600px", margin:"0 auto"}}>
-              {this.shuffle(this.state.allQuestions).filter(i=>i.active !== false).slice(0, 1).map(i=> (
-              <div className="questionCard" key={i._id+"div"}>
-              <Animated animationIn="bounceInRight" animationOut="wobble" isVisible={true}>
-                <QuestionCard 
-                key={i._id+"questionCard"}
-                question={i.question}
-                >
-                  </QuestionCard>
-                    <input key={i._id+"Input"} style={{borderRadius:"5%"}} placeholder="Answer Question" ref={this.userAnswer} />
-                  <FormBtn
-                    key={i._id+"Button"}
-                    onClick={()=>this.checkAnswer(this.userAnswer.current.value, i.answer, i._id)}
-                    >Answer
-                  </FormBtn>
-                </Animated>
+                <div className="quesWrap">
+                  {this.shuffle(this.state.allQuestions).filter(i=>i.active !== false).slice(0, 1).map(i=> (
+                  <div className="questionCard" key={i._id+"div"}>
+                  <Animated animationIn="bounceInRight" animationOut="wobble" isVisible={true}>
+                    <QuestionCard 
+                    key={i._id+"questionCard"}
+                    question={i.question}
+                    >
+                    </QuestionCard>
+                      <input key={i._id+"Input"} style={{borderRadius:"5%"}} placeholder="Answer Question" ref={this.userAnswer} />
+                    <FormBtn
+                      key={i._id+"Button"}
+                      onClick={()=>this.checkAnswer(this.userAnswer.current.value, i.answer, i._id)}
+                      >Answer
+                    </FormBtn>
+                  </Animated>
+                  </div>
+                ))}
                 </div>
-            ))}
-            </div>
 
-             ) : (
+                ) : (
 
-              <div className="quesWrap" style={{width:"600px", margin:"0 auto"}}>
-              {this.state.allQuestions.filter(i=>i.correct !== false).map(i=> (
-              <div className="questionCard" key={i._id+"div"}>
-              <Animated animationIn="wobble" animationOut="wobble" isVisible={false}>
-                <QuestionCard 
-                key={i._id+"questionCard"}
-                question={"The correct answer is " +i.answer}
-                >
-                </QuestionCard>
-              </Animated>
-              <FormBtn 
-                  key={i._id+"Button"}
-                  onClick={()=>this.wrongAnswer(i.question, i.answer, i._id)}
-                  >Got It!
-                </FormBtn>
-              </div>
-            ))}
-            </div>)}
+                  <div className="quesWrap">
+                  {this.state.allQuestions.filter(i=>i.correct !== false).map(i=> (
+                  <div className="questionCard" key={i._id+"div"}>
+                  <Animated animationIn="wobble" animationOut="wobble" isVisible={false}>
+                    <QuestionCard 
+                    key={i._id+"questionCard"}
+                    question={"The correct answer is " +i.answer}
+                    >
+                    </QuestionCard>
+                  </Animated>
+                  <FormBtn
+                      key={i._id+"Button"}
+                      onClick={()=>this.wrongAnswer(i.question, i.answer, i._id)}
+                      >Got It!
+                    </FormBtn>
+                  </div>
+                ))}
+                </div>)}
 
 
-          </Col>
-          <Col size="md-12 sm-12">
-         
-          </Col>
-        </Row>  /////////////////////////////////////////////GAME SUMMARY RENDER/////////////////////////////////////////////
-      ) : (  
-        <Row>
-          <Col size="md-12">
+              </Col>
+              <Col size="md-12 sm-12">
+            
+              </Col>
+            </Row>  /////////////////////////////////////////////GAME SUMMARY RENDER/////////////////////////////////////////////
+          ) : (  
+            <Row>
+              <Col size="md-12">
+              
+                <Jumbotron>
+                  <h1>Study Buddy</h1>
+                  <h3>Answer the questions!</h3>
+                </Jumbotron>
+                <Score 
+                correct={this.state.correct}
+                wrong={this.state.wrong}
+                />
+                <h1>Done</h1>  
+              </Col>
+            </Row>
           
-            <Jumbotron>
-              <h1>Study Buddy</h1>
-              <h3>Answer the questions!</h3>
-            </Jumbotron>
-            <Score 
-            correct={this.state.correct}
-            wrong={this.state.wrong}
-            />
-            <h1>Done</h1>  
-          </Col>
-        </Row>
-       
-      
-      )}  
+          
+          )} </div> ) : (<Jumbotron><h1>Please Log In!</h1></Jumbotron>))}
+
+
+
+
+
+
+
+        </MyContext.Consumer>
       </Container>
     );
   }

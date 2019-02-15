@@ -5,6 +5,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { QuestionList, QuestionListItem } from "../components/QuestionList";
 import { Input, FormBtn } from "../components/Form";
 import { Provider, MyContext } from "../MyContext";
+import Nav from "../components/Nav";
 
 
 class Questions extends Component {
@@ -19,6 +20,7 @@ class Questions extends Component {
     answer: ""
   };
 }
+
 
   componentDidMount() {
     API.getQuestions().then(res => this.setState({ allQuestions : res.data }))
@@ -74,77 +76,93 @@ class Questions extends Component {
 
   render() {
     return (
-      <Provider>
-      <MyContext.Consumer>
-        
-              { value  => {
-                const {auth, currentId }=value;
-                console.log(auth);
-       return (auth) ? ( 
-          <Container fluid>
-            <Row>
-              <Col size="md-12">
+    
+      <Container fluid>
+      <Nav />
+        <Row>
+          <Col size="md-12">
+      
+            <Jumbotron>
+            <MyContext.Consumer>
+              {({ currentUser }) => (
+                <h1 className="App-title">
+                  {currentUser ? `Welcome ${currentUser} \nAdd Questions Below` : "Please Log In!"}
+                </h1>
+                
+              )}
+            </MyContext.Consumer>
+            </Jumbotron>
+          </Col>
+        </Row>
+          <MyContext.Consumer>
+              {({ auth, currentId }) => (
+                auth ? (
+          <Row>
+           <Col size="md-12">  
+            
+           
+            <form>
+              <Input
+                value={this.state.question}
+                onChange={this.handleInputChange}
+                name="question"
+                placeholder="Question (required)"
+              />
+              <Input
+                value={this.state.answer}
+                onChange={this.handleInputChange}
+                name="answer"
+                placeholder="Answer (required)"
+              />
+      
+                <FormBtn
+                disabled={!(this.state.question) || !(this.state.answer)}
+                onClick={()=>this.handleQuestion(currentId)}
+              >
+                Submit
+              </FormBtn>
+                
+            </form>
 
-                <Jumbotron>
-                  <h1>Study Buddy</h1>
-                  <h3>Enter A Question!</h3>
-                </Jumbotron>
-                
-                <form>
-                  <Input
-                    value={this.state.question}
-                    onChange={this.handleInputChange}
-                    name="question"
-                    placeholder="Question (required)"
+            
+            
+          </Col>
+         
+          <Col size="md-12 sm-12">
+            {this.state.allQuestions.length ? (
+              <QuestionList>
+              {this.state.allQuestions.map(ques=> (
+              
+                <QuestionListItem
+                  key = {ques._id}
+                  id = {ques._id}
+                  answer = {ques.answer}
+                  question = {ques.question} 
+                  deleteQuestion = {this.deleteQuestion}      
                   />
-                  <Input
-                    value={this.state.answer}
-                    onChange={this.handleInputChange}
-                    name="answer"
-                    placeholder="Answer (required)"
-                  />
-          
                 
-                  {/* { currentId  => {
-                  <FormBtn
-                  disabled={!(this.state.question) || !(this.state.answer)}
-                  onClick={()=>this.handleQuestion(currentId)}
-                >
-                  Submit
-                </FormBtn>
-                  }} */}
-                
-                  
-        
-
-                </form>
-              </Col>
-              <Col size="md-12 sm-12">
-                {this.state.allQuestions.length ? (
-                  <QuestionList>
-                  {this.state.allQuestions.map(ques=> (
-                  
-                    <QuestionListItem
-                      key = {ques._id}
-                      id = {ques._id}
-                      answer = {ques.answer}
-                      question = {ques.question} 
-                      deleteQuestion = {this.deleteQuestion}      
-                      />
-                    
-                    )
-                    )}
-                </QuestionList>
-                ) : (
-                  <h3>No Questions Entered Yet!</h3>
+                )
                 )}
-              </Col>
-            </Row>
-          </Container>
-        ) : (<h1>hi!!!!!!!!!!!!!1</h1>)    
-      }}
-      </MyContext.Consumer>
-     </Provider>
+            </QuestionList>
+            ) : (
+              <h3>No Questions Entered Yet!</h3>
+            )}
+           </Col>
+          </Row>
+           ) : (<h2></h2>))}
+            
+           </MyContext.Consumer>
+       
+      
+     
+      
+
+
+
+
+
+
+        </Container>
     )
   }
 }
