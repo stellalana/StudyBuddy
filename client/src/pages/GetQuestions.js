@@ -5,6 +5,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { QuestionList, QuestionListItem } from "../components/QuestionList";
 import { Input, FormBtn } from "../components/Form";
 import { Provider, MyContext } from "../MyContext";
+import Nav from "../components/Nav";
 
 
 class Questions extends Component {
@@ -19,6 +20,7 @@ class Questions extends Component {
     answer: ""
   };
 }
+
 
   componentDidMount() {
     API.getQuestions().then(res => this.setState({ allQuestions : res.data }))
@@ -74,10 +76,34 @@ class Questions extends Component {
 
   render() {
     return (
+    
       <Container fluid>
+      <Nav />
         <Row>
           <Col size="md-12">
-          <h1 className="createIntro">Create a Flash Card!</h1>
+
+      
+            <Jumbotron>
+            <MyContext.Consumer>
+              {({ currentUser }) => (
+                <h1 className="App-title">
+                  {currentUser ? `Welcome ${currentUser} \nAdd Questions Below` : "Please Log In!"}
+                </h1>
+                
+              )}
+            </MyContext.Consumer>
+            </Jumbotron>
+          </Col>
+        </Row>
+          <MyContext.Consumer>
+              {({ auth, currentId }) => (
+                auth ? (
+          <Row>
+           <Col size="md-12">  
+            
+           
+
+
             <form>
               <Input
                 value={this.state.question}
@@ -92,23 +118,19 @@ class Questions extends Component {
                 placeholder="Definition"
               />
       
-              <Provider>
-              <MyContext.Consumer>
-              {({ currentId }) => (
-               <FormBtn
-               disabled={!(this.state.question) || !(this.state.answer)}
-               onClick={()=>this.handleQuestion(currentId)}
-             >
-               Submit
-             </FormBtn>
-              )}
-            </MyContext.Consumer>
-            </Provider>
-              
-    
-
+                <FormBtn
+                disabled={!(this.state.question) || !(this.state.answer)}
+                onClick={()=>this.handleQuestion(currentId)}
+              >
+                Submit
+              </FormBtn>
+                
             </form>
+
+            
+            
           </Col>
+         
           <Col size="md-12 sm-12">
             {this.state.allQuestions.length ? (
               <QuestionList>
@@ -128,10 +150,23 @@ class Questions extends Component {
             ) : (
               <h3>No Questions Entered Yet!</h3>
             )}
-          </Col>
-        </Row>
-      </Container>
-    );
+           </Col>
+          </Row>
+           ) : (<h2></h2>))}
+            
+           </MyContext.Consumer>
+       
+      
+     
+      
+
+
+
+
+
+
+        </Container>
+    )
   }
 }
 
