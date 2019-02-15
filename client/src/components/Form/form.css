@@ -2,18 +2,18 @@
     margin:0 auto;
     display:block;
     margin-top: 5px;
-    background-color: #40676E;
+    background-color:  #ACD0B6 !important;
     border-style: solid;
-    border-color: #40676E;
-    color: #FFFFFF;
+    border-color: #40676E !important;
+    color: #40676E !important;
 }
 .btn-success:hover {
     margin:0 auto;
     display:block;
     margin-top: 5px;
-    background-color: #FFFFFF;
+    background-color: #FFFFFF !important;
     border-style: solid;
-    border-color: #40676E;
+    border-color: #40676E !important;
     color: #40676E;
 }
 
