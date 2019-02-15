@@ -10,7 +10,8 @@ class Provider extends Component {
     currentId: null,
     userNames: [],
     passwords: [],
-    userIds: []
+    userIds: [],
+    auth: false
   };
 
   componentDidMount() {
@@ -34,23 +35,26 @@ class Provider extends Component {
       .catch(err => console.log(err));
     };
 
-  logIn = (name, password) => { 
+  logIn = async (name, password) => { 
+    
+    console.log(name);
     var where = this.state.userNames.indexOf(name);
     if (where > -1 && this.state.passwords[where] === password) {
       var id = this.state.userIds[where];
-      
-      this.setState({ currentUser: name, password: password, currentId: id });
+      console.log(this.state);
+      await this.setState({ currentUser: name, password: password, currentId: id, auth: true },()=>console.log(this.state.auth));
       
     }
     else {
       console.log("invalid password");
+      this.setState({ currentUser: null });
     }
-    console.log(this.state);
+
   };
 
   logOut = () => {
     console.log(this.state);
-    this.setState({ currentUser: null, password: null });}
+    this.setState({ currentUser: null, password: null, auth: false });}
 
   handleQuestion=(question, answer)=> {
     console.log(this.state.currentId);
@@ -76,7 +80,10 @@ class Provider extends Component {
           password: this.state.password,
           logIn: this.logIn,
           logOut: this.logOut,
-          handleQuestion: this.handleQuestion
+          handleQuestion: this.handleQuestion,
+          auth: this.state.auth,
+          currentId: this.state.currentId
+        
         }}
       >
         {this.props.children}

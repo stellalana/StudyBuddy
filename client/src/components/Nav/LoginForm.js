@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MyContext } from "../../MyContext";
+import { Provider, MyContext } from "../../MyContext";
 
 
 class LoginForm extends Component {
@@ -15,6 +15,7 @@ class LoginForm extends Component {
 
   render() {
     return (
+    
       <MyContext.Consumer>
         {value => {
           const { currentUser, logIn, logOut } = value;
@@ -42,6 +43,7 @@ class LoginForm extends Component {
           );
         }}
       </MyContext.Consumer>
+       
     );
   }
 }

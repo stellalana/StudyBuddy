@@ -12,15 +12,16 @@ class App extends Component {
     return (
       <Router>
         <div>
-        <Provider>
+          <Provider >
             <Nav />
-        </Provider>
+          
           <Switch>
             <Route exact path="/" component={NoMatch} />
             <Route exact path="/getQuestions" component={GetQuestions} />
             <Route exact path="/test" component={Test} />
             <Route component={NoMatch} />
           </Switch>
+          </Provider>
         </div>
       </Router>
     );

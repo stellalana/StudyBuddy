@@ -74,68 +74,78 @@ class Questions extends Component {
 
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-12">
-      
-            <Jumbotron>
-              <h1>Study Buddy</h1>
-              <h3>Enter A Question!</h3>
-            </Jumbotron>
-            <form>
-              <Input
-                value={this.state.question}
-                onChange={this.handleInputChange}
-                name="question"
-                placeholder="Question (required)"
-              />
-              <Input
-                value={this.state.answer}
-                onChange={this.handleInputChange}
-                name="answer"
-                placeholder="Answer (required)"
-              />
-      
-              <Provider>
-              <MyContext.Consumer>
-              {({ currentId }) => (
-               <FormBtn
-               disabled={!(this.state.question) || !(this.state.answer)}
-               onClick={()=>this.handleQuestion(currentId)}
-             >
-               Submit
-             </FormBtn>
-              )}
-            </MyContext.Consumer>
-            </Provider>
-              
-    
+      <Provider>
+      <MyContext.Consumer>
+        
+              { value  => {
+                const {auth, currentId }=value;
+                console.log(auth);
+       return (auth) ? ( 
+          <Container fluid>
+            <Row>
+              <Col size="md-12">
 
-            </form>
-          </Col>
-          <Col size="md-12 sm-12">
-            {this.state.allQuestions.length ? (
-              <QuestionList>
-              {this.state.allQuestions.map(ques=> (
-              
-                <QuestionListItem
-                  key = {ques._id}
-                  id = {ques._id}
-                  answer = {ques.answer}
-                  question = {ques.question} 
-                  deleteQuestion = {this.deleteQuestion}      
-                  />
+                <Jumbotron>
+                  <h1>Study Buddy</h1>
+                  <h3>Enter A Question!</h3>
+                </Jumbotron>
                 
-                )
+                <form>
+                  <Input
+                    value={this.state.question}
+                    onChange={this.handleInputChange}
+                    name="question"
+                    placeholder="Question (required)"
+                  />
+                  <Input
+                    value={this.state.answer}
+                    onChange={this.handleInputChange}
+                    name="answer"
+                    placeholder="Answer (required)"
+                  />
+          
+                
+                  {/* { currentId  => {
+                  <FormBtn
+                  disabled={!(this.state.question) || !(this.state.answer)}
+                  onClick={()=>this.handleQuestion(currentId)}
+                >
+                  Submit
+                </FormBtn>
+                  }} */}
+                
+                  
+        
+
+                </form>
+              </Col>
+              <Col size="md-12 sm-12">
+                {this.state.allQuestions.length ? (
+                  <QuestionList>
+                  {this.state.allQuestions.map(ques=> (
+                  
+                    <QuestionListItem
+                      key = {ques._id}
+                      id = {ques._id}
+                      answer = {ques.answer}
+                      question = {ques.question} 
+                      deleteQuestion = {this.deleteQuestion}      
+                      />
+                    
+                    )
+                    )}
+                </QuestionList>
+                ) : (
+                  <h3>No Questions Entered Yet!</h3>
                 )}
-            </QuestionList>
-            ) : (
-              <h3>No Questions Entered Yet!</h3>
-            )}
-          </Col>
-        </Row>
-      </Container>
-    );
+              </Col>
+            </Row>
+          </Container>
+        ) : (<h1>hi!!!!!!!!!!!!!1</h1>)    
+      }}
+      </MyContext.Consumer>
+     </Provider>
+    )
   }
 }
 

@@ -97,7 +97,7 @@ wrongAnswer = (question, answer, id) => {
 
 render() {
     return (
-      <Container fluid>
+      <Container fluid >
       {this.state.notDone ? (
         <Row>
           <Col size="md-12">
@@ -113,7 +113,7 @@ render() {
 
            {this.state.rightScreen ? (    
 
-            <div className="quesWrap">
+            <div className="quesWrap" style={{width:"600px", margin:"0 auto"}}>
               {this.shuffle(this.state.allQuestions).filter(i=>i.active !== false).slice(0, 1).map(i=> (
               <div className="questionCard" key={i._id+"div"}>
               <Animated animationIn="bounceInRight" animationOut="wobble" isVisible={true}>
@@ -121,21 +121,21 @@ render() {
                 key={i._id+"questionCard"}
                 question={i.question}
                 >
-                </QuestionCard>
-                  <input key={i._id+"Input"} style={{borderRadius:"5%"}} placeholder="Answer Question" ref={this.userAnswer} />
-                <FormBtn
-                  key={i._id+"Button"}
-                  onClick={()=>this.checkAnswer(this.userAnswer.current.value, i.answer, i._id)}
-                  >Answer
-                </FormBtn>
-              </Animated>
-              </div>
+                  </QuestionCard>
+                    <input key={i._id+"Input"} style={{borderRadius:"5%"}} placeholder="Answer Question" ref={this.userAnswer} />
+                  <FormBtn
+                    key={i._id+"Button"}
+                    onClick={()=>this.checkAnswer(this.userAnswer.current.value, i.answer, i._id)}
+                    >Answer
+                  </FormBtn>
+                </Animated>
+                </div>
             ))}
             </div>
 
              ) : (
 
-              <div className="quesWrap">
+              <div className="quesWrap" style={{width:"600px", margin:"0 auto"}}>
               {this.state.allQuestions.filter(i=>i.correct !== false).map(i=> (
               <div className="questionCard" key={i._id+"div"}>
               <Animated animationIn="wobble" animationOut="wobble" isVisible={false}>
@@ -145,7 +145,7 @@ render() {
                 >
                 </QuestionCard>
               </Animated>
-              <FormBtn
+              <FormBtn 
                   key={i._id+"Button"}
                   onClick={()=>this.wrongAnswer(i.question, i.answer, i._id)}
                   >Got It!
