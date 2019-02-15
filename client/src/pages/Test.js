@@ -101,11 +101,7 @@ render() {
       {this.state.notDone ? (
         <Row>
           <Col size="md-12">
-          
-            <Jumbotron>
-              <h1>Study Buddy</h1>
-              <h3>Answer the questions!</h3>
-            </Jumbotron>
+          <h1 className="createIntro">CardSet #1!</h1>
             <Score 
             correct={this.state.correct}
             wrong={this.state.wrong}

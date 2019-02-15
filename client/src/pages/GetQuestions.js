@@ -77,23 +77,19 @@ class Questions extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-      
-            <Jumbotron>
-              <h1>Study Buddy</h1>
-              <h3>Enter A Question!</h3>
-            </Jumbotron>
+          <h1 className="createIntro">Create a Flash Card!</h1>
             <form>
               <Input
                 value={this.state.question}
                 onChange={this.handleInputChange}
                 name="question"
-                placeholder="Question (required)"
+                placeholder="Term"
               />
               <Input
                 value={this.state.answer}
                 onChange={this.handleInputChange}
                 name="answer"
-                placeholder="Answer (required)"
+                placeholder="Definition"
               />
       
               <Provider>
