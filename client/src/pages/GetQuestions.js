@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
-import { BookList, BookListItem } from "../components/Booklist";
+import { QuestionList, QuestionListItem } from "../components/QuestionList";
 import { Input, FormBtn } from "../components/Form";
 import { Provider, MyContext } from "../MyContext";
 
 
-class Books extends Component {
+class Questions extends Component {
   constructor(props) {
     super(props);
   
@@ -77,22 +77,19 @@ class Books extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-      
-            <Jumbotron>
-              <h1 class="jumboTitle">Study Buddy</h1>
-            </Jumbotron>
+          <h1 className="createIntro">Create a Flash Card!</h1>
             <form>
               <Input
                 value={this.state.question}
                 onChange={this.handleInputChange}
                 name="question"
-                placeholder="Question (required)"
+                placeholder="Term"
               />
               <Input
                 value={this.state.answer}
                 onChange={this.handleInputChange}
                 name="answer"
-                placeholder="Answer (required)"
+                placeholder="Definition"
               />
       
               <Provider>
@@ -114,10 +111,10 @@ class Books extends Component {
           </Col>
           <Col size="md-12 sm-12">
             {this.state.allQuestions.length ? (
-              <BookList>
+              <QuestionList>
               {this.state.allQuestions.map(ques=> (
               
-                <BookListItem
+                <QuestionListItem
                   key = {ques._id}
                   id = {ques._id}
                   answer = {ques.answer}
@@ -127,7 +124,7 @@ class Books extends Component {
                 
                 )
                 )}
-            </BookList>
+            </QuestionList>
             ) : (
               <h3>No Questions Entered Yet!</h3>
             )}
@@ -138,4 +135,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default Questions;

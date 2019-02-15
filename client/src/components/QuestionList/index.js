@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "../Grid";
 import DeleteBtn from "../DeleteBtn";
+import "./style.css";
 
 // Exporting both RecipeList and RecipeListItem from this file
 
@@ -12,8 +13,8 @@ export function QuestionList({ children }) {
 // RecipeListItem renders a bootstrap list item containing data from the recipe api call
 export function QuestionListItem({
   id,
-  question,
   answer,
+  question,
   deleteQuestion
 }) {
 
@@ -21,9 +22,16 @@ export function QuestionListItem({
     <li className="list-group-item">
       <Container>
         <Row>
-          <Col size="sm-12">
-            <p>Question: {question}</p>
-            <p>Answer: {answer}</p>
+          <Col size="xs-8 sm-9">
+          <div className="cardSetQ">
+              <p className="storedQuestion">{question}</p>
+              <p className="headerTerm">TERM</p>
+            </div>
+
+            <div className="cardSetA">
+              <p className="storedAnswer">{answer}</p>
+              <p className="headerDefinition">DEFINITION</p>
+            </div>
           </Col>
         </Row>
         <DeleteBtn onClick={()=>deleteQuestion(id)} id={id} />

@@ -11,23 +11,24 @@ export function BookList({ children }) {
 }
 
 // RecipeListItem renders a bootstrap list item containing data from the recipe api call
-export function BookListItem({
-  id,
-  answer,
-  question,
-  deleteQuestion
-}) {
-
+export function BookListItem({ id, answer, question, deleteQuestion }) {
   return (
     <li className="list-group-item">
       <Container>
         <Row>
-          <Col size="xs-8 sm-9">
-            <h3>{question}</h3>
-            <p>Answer: {answer}</p>
+          <Col size="xs-8 sm-9 cardsets">
+            <div className="cardSetQ">
+              <p className="storedQuestion">{question}</p>
+              <p className="headerTerm">TERM</p>
+            </div>
+
+            <div className="cardSetA">
+              <p className="storedAnswer">{answer}</p>
+              <p className="headerDefinition">DEFINITION</p>
+            </div>
           </Col>
         </Row>
-        <DeleteBtn onClick={()=>deleteQuestion(id)} id={id} />
+        <DeleteBtn onClick={() => deleteQuestion(id)} id={id} />
       </Container>
     </li>
   );
