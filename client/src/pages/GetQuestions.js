@@ -81,6 +81,7 @@ class Questions extends Component {
       <Nav />
         <Row>
           <Col size="md-12">
+
       
             <Jumbotron>
             <MyContext.Consumer>
@@ -101,18 +102,20 @@ class Questions extends Component {
            <Col size="md-12">  
             
            
+
+
             <form>
               <Input
                 value={this.state.question}
                 onChange={this.handleInputChange}
                 name="question"
-                placeholder="Question (required)"
+                placeholder="Term"
               />
               <Input
                 value={this.state.answer}
                 onChange={this.handleInputChange}
                 name="answer"
-                placeholder="Answer (required)"
+                placeholder="Definition"
               />
       
                 <FormBtn

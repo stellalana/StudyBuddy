@@ -1,32 +1,38 @@
 .card {
-  background: #fff;
+  background: #999;
   border-radius: 2px;
   height: 200px;
-  margin: 0 auto;
+  margin: auto;
   width: 600px;
   box-shadow: 0 3px 6px #999, 0 3px 6px #999;
   text-align: center;
   cursor: pointer;
-
-  
 }
-
+.card:hover {
+  background: rgb(154, 173, 143);
+  -webkit-animation: pulse .5s;
+  animation: pulse .5s;
+}
 .card > .img-container:hover {
-  background: aqua;
+  background: rgb(154, 173, 143);
 }
-
 .card > .img-container {
-  height: 85%;
+  display: flex;
+  height: 100%;
   overflow: hidden;
   text-align: center;
   background: linear-gradient(270deg, #ffdea9, #647a93);
-	background-size: 400% 400%;
+  background-size: 400% 400%;
+  border-radius: 2px;
+  border-color: rgb(0, 0, 0);
 
 	-webkit-animation: shimmer 30s ease infinite;
 	-moz-animation: shimmer 30s ease infinite;
 	animation: shimmer 30s ease infinite;
 }
-
+h1 {
+  margin: auto; 
+}
 	@-webkit-keyframes shimmer {
 		 0%{background-position:0% 50%}
 		 50%{background-position:100% 50%}
@@ -44,12 +50,13 @@
 }
 .card > .img-container > img {
   width: 85%;
+  height: 100%;
 }
 
 .card > .content {
-  padding-left: 1rem;
+  /* padding-left: 1rem;
   padding-right: 1rem;
-  font-size: 15px;
+  font-size: 15px; */
 }
 
 .card > .content > ul {

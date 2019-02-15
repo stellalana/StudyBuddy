@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "../Grid";
 import DeleteBtn from "../DeleteBtn";
+import "./style.css";
 
 // Exporting both RecipeList and RecipeListItem from this file
 
@@ -22,8 +23,15 @@ export function QuestionListItem({
       <Container>
         <Row>
           <Col size="xs-8 sm-9">
-            <h3>{question}</h3>
-            <p>Answer: {answer}</p>
+          <div className="cardSetQ">
+              <p className="storedQuestion">{question}</p>
+              <p className="headerTerm">TERM</p>
+            </div>
+
+            <div className="cardSetA">
+              <p className="storedAnswer">{answer}</p>
+              <p className="headerDefinition">DEFINITION</p>
+            </div>
           </Col>
         </Row>
         <DeleteBtn onClick={()=>deleteQuestion(id)} id={id} />

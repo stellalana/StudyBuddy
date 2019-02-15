@@ -8,12 +8,14 @@ function NoMatch() {
       <Row>
         <Col size="md-12">
           <Jumbotron>
+            <div className="jumboTitle">
             <h1>404 Page Not Found</h1>
             <h1>
               <span role="img" aria-label="Face With Rolling Eyes Emoji">
                 🙄
               </span>
             </h1>
+            </div>
           </Jumbotron>
         </Col>
       </Row>

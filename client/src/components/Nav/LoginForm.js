@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { MyContext } from "../../MyContext";
+import "./style.css";
 
 
 class LoginForm extends Component {

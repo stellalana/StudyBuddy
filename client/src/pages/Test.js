@@ -99,6 +99,7 @@ wrongAnswer = (question, answer, id) => {
 render() {
     return (
       <Container fluid>
+
        <Nav/>
        <MyContext.Consumer>
        {({ auth }) => (
@@ -183,6 +184,7 @@ render() {
               </Col>
             </Row>
           
+
           
           )} </div> ) : (<Jumbotron><h1>Please Log In!</h1></Jumbotron>))}
 
