@@ -1,6 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
+import API from "../utils/API";
+import QuestionCard from "../components/QuestionCard";
+
 
 function Landing() {
   return (
@@ -21,7 +24,7 @@ function Landing() {
               nulla pariatur. Excepteur sint occaecat cupidatat non proident,
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
-          </span>
+            </span>
         </Col>
       </Row>
     </Container>
