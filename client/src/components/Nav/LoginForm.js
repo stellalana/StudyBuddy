@@ -28,8 +28,8 @@ class LoginForm extends Component {
             <div>
               <form style={{paddingRight: "10px"}}
               >
-                <input style={{borderRadius:"5%"}} placeholder="Username" ref={this.userInput} />
-                <input style={{borderRadius:"5%"}} placeholder="Password" ref={this.passwordInput} />
+                <input className="usernameInput" style={{borderRadius:"5%"}} placeholder="Username" ref={this.userInput} />
+                <input className="passwordInput" style={{borderRadius:"5%"}} placeholder="Password" ref={this.passwordInput} />
                 <button
                    className="btn-primary" 
                   onClick={() => {
