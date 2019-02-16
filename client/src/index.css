@@ -91,3 +91,22 @@ body {
   margin-top: 50px;
   margin-bottom: 200px;
 }
+
+/* navbar */
+
+a { 
+  color: #40676E;
+  font-family: 'Merriweather', serif;
+}
+
+.btn-primary {
+  background-color: #40676E;
+}
+
+.usernameInput, .passwordInput {
+  padding-left: 10px !important;
+  width: 120px;
+  margin-left: 10px;
+  font-family: 'PT Serif', serif;
+}
+
