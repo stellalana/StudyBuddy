@@ -8,6 +8,7 @@ import { FormBtn } from "../components/Form";
 import Score from "../components/Score";
 import {Animated} from "react-animated-css";
 import Nav from "../components/Nav";
+import { ShuffleSound, FailSound, BellSound } from "../components/Sounds";
 
 
 class Test extends Component {
@@ -125,6 +126,7 @@ render() {
                   {this.shuffle(this.state.allQuestions).filter(i=>i.active !== false).slice(0, 1).map(i=> (
                   <div className="questionCard" key={i._id+"div"}>
                   <Animated animationIn="bounceInRight" animationOut="wobble" isVisible={true}>
+                    <ShuffleSound />
                     <QuestionCard 
                     key={i._id+"questionCard"}
                     question={i.question}
@@ -147,6 +149,7 @@ render() {
                   {this.state.allQuestions.filter(i=>i.correct !== false).map(i=> (
                   <div className="questionCard" key={i._id+"div"}>
                   <Animated animationIn="wobble" animationOut="wobble" isVisible={false}>
+                    <ShuffleSound />
                     <QuestionCard 
                     key={i._id+"questionCard"}
                     question={"The correct answer is " +i.answer}
