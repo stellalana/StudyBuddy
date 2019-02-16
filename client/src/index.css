@@ -100,7 +100,13 @@ a {
 }
 
 .btn-primary {
-  background-color: #40676E;
+  background-color: #BFCAE0;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #40676E;
+  color: #40676E;
+  font-family: 'PT Serif', serif;
 }
 
 .usernameInput, .passwordInput {
@@ -108,5 +114,9 @@ a {
   width: 120px;
   margin-left: 10px;
   font-family: 'PT Serif', serif;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 1px;
+  border-color: #40676E;
 }
 
