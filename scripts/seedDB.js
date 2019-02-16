@@ -46,7 +46,7 @@ const userSeed = [
     userName: "Stella",
     password: "1234",
     firstName: "Stella",
-    lastName: "Stella",
+    lastName: "Griffith",
     saved: true,
     createDate: new Date(Date.now())
   },
@@ -54,7 +54,15 @@ const userSeed = [
       userName: "Zeke",
       password: "1234",
       firstName: "Zeke",
-      lastName: "Zeke",
+      lastName: "Graves",
+      saved: true,
+      createDate: new Date(Date.now())
+    }
+    {
+      userName: "John",
+      password: "1234",
+      firstName: "John",
+      lastName: "Peters",
       saved: true,
       createDate: new Date(Date.now())
     }
