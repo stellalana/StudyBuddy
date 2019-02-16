@@ -2,16 +2,18 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #BFCAE0;
+  background-color: #bfcae0;
   /* background-color: #B5BEC3; */
-  
+}
+.container-fluid {
+  padding: 0;
 }
 
 .createIntro {
   text-align: center;
-  font-family: 'Merriweather', serif;
+  font-family: "Merriweather", serif;
   margin-top: 25px;
-  color: #40676E;
+  color: #40676e;
 }
 .col-cardsets {
   align-content: center;
@@ -35,13 +37,14 @@ body {
   display: inline block;
 } */
 
-.headerTerm, .headerDefinition {
+.headerTerm,
+.headerDefinition {
   font-size: 12px;
-  color: #40676E;
+  color: #40676e;
   margin-top: 5px;
   font-weight: bold;
-  letter-spacing: .5px;
-  font-family: 'Fjalla One', sans-serif;
+  letter-spacing: 0.5px;
+  font-family: "Fjalla One", sans-serif;
 }
 
 .col-md-12 {
@@ -80,7 +83,7 @@ body {
   padding: 10px;
   margin-bottom: 5px;
   border-radius: 5px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 /* landing page */
@@ -93,20 +96,23 @@ body {
 }
 
 /* navbar */
+nav {
+  width: 100%;
+}
 
-a { 
-  color: #40676E;
-  font-family: 'Merriweather', serif;
+a {
+  color: #40676e;
+  font-family: "Merriweather", serif;
 }
 
 .btn-primary {
-  background-color: #40676E;
+  background-color: #40676e;
 }
 
-.usernameInput, .passwordInput {
+.usernameInput,
+.passwordInput {
   padding-left: 10px !important;
   width: 120px;
   margin-left: 10px;
-  font-family: 'PT Serif', serif;
+  font-family: "PT Serif", serif;
 }
-

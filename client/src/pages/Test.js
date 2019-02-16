@@ -189,7 +189,7 @@ render() {
           
 
           
-          )} </div> ) : (<Jumbotron><h1>Please Log In!</h1></Jumbotron>))}
+          )} </div> ) : (<h1 className="createIntro">Please Log In!</h1>))}
 
 
 
