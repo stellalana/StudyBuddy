@@ -8,7 +8,7 @@ import { FormBtn } from "../components/Form";
 import Score from "../components/Score";
 import {Animated} from "react-animated-css";
 import Nav from "../components/Nav";
-import { ShuffleSound, FailSound, BellSound } from "../components/Sounds";
+import { ShuffleSound, FailSound, BellSound, DoneSound } from "../components/Sounds";
 
 
 class Test extends Component {
@@ -28,6 +28,7 @@ class Test extends Component {
     wrong: 0,
     notDone: true,
     rightScreen: true,
+    correctSound: false
   };
 }
 
@@ -58,10 +59,10 @@ checkAnswer = (userAnswer, correctAnswer, id) => {
      tempState.allQuestions[where].active = false;
      if (this.state.correct + 1 === this.state.allQuestions.length) {
 
-     this.setState({ allQuestions : tempState.allQuestions, correct : this.state.correct + 1, notDone:false });
+     this.setState({ allQuestions : tempState.allQuestions, correct : this.state.correct + 1, notDone:false, correctSound: true });
      }
      else {
-      this.setState({ allQuestions : tempState.allQuestions, correct : this.state.correct + 1 });
+      this.setState({ allQuestions : tempState.allQuestions, correct : this.state.correct + 1, correctSound: true });
      }
    }
    else {
@@ -76,7 +77,7 @@ checkAnswer = (userAnswer, correctAnswer, id) => {
     var temp2State = this.state;
      temp2State.allQuestions[whereWrong].correct = true;
      console.log(this.state.allQuestions[whereWrong].question);
-     this.setState({ allQuestions: temp2State.allQuestions, wrong: this.state.wrong + 1, rightScreen: false})
+     this.setState({ allQuestions: temp2State.allQuestions, wrong: this.state.wrong + 1, rightScreen: false, correctSound: false })
      console.log(this.state);
    }
 }
@@ -92,7 +93,7 @@ wrongAnswer = (question, answer, id) => {
   var temp3State = this.state;
    temp3State.allQuestions[whereWrong].correct = false;
    console.log(this.state.allQuestions[whereWrong].question);
-   this.setState({ allQuestions: temp3State.allQuestions, rightScreen: true})
+   this.setState({ allQuestions: temp3State.allQuestions, rightScreen: true })
    console.log(this.state);
 
 }
@@ -125,8 +126,8 @@ render() {
                 <div className="quesWrap">
                   {this.shuffle(this.state.allQuestions).filter(i=>i.active !== false).slice(0, 1).map(i=> (
                   <div className="questionCard" key={i._id+"div"}>
+                  {this.state.correctSound ? <BellSound /> : <ShuffleSound />}
                   <Animated animationIn="bounceInRight" animationOut="wobble" isVisible={true}>
-                    <ShuffleSound />
                     <QuestionCard 
                     key={i._id+"questionCard"}
                     question={i.question}
@@ -148,8 +149,8 @@ render() {
                   <div className="quesWrap">
                   {this.state.allQuestions.filter(i=>i.correct !== false).map(i=> (
                   <div className="questionCard" key={i._id+"div"}>
+                  <FailSound />
                   <Animated animationIn="wobble" animationOut="wobble" isVisible={false}>
-                    <ShuffleSound />
                     <QuestionCard 
                     key={i._id+"questionCard"}
                     question={"The correct answer is " +i.answer}
@@ -183,7 +184,8 @@ render() {
                 correct={this.state.correct}
                 wrong={this.state.wrong}
                 />
-                <h1>Done</h1>  
+                <h1>Done</h1>
+                <DoneSound />  
               </Col>
             </Row>
           
