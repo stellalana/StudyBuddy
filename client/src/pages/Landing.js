@@ -7,7 +7,7 @@ import QuestionCard from "../components/QuestionCard";
 
 function Landing() {
   return (
-    <Container fluid>
+    <Container>
       <Row>
         <Col size="md-12">
           <Jumbotron>
