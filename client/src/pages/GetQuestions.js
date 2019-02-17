@@ -81,18 +81,16 @@ class Questions extends Component {
       <Nav />
         <Row>
           <Col size="md-12">
-
       
-            <Jumbotron>
             <MyContext.Consumer>
               {({ currentUser }) => (
-                <h1 className="App-title">
-                  {currentUser ? `Welcome ${currentUser} \nAdd Questions Below` : "Please Log In!"}
+                <h1 className="createIntro">
+                  {currentUser ? `Welcome, ${currentUser}, \nCreate a Flash Card Below!` : "Please Log In!"}
                 </h1>
                 
               )}
             </MyContext.Consumer>
-            </Jumbotron>
+            
           </Col>
         </Row>
           <MyContext.Consumer>

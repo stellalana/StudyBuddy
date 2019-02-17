@@ -64,7 +64,7 @@ const userSeed = [
   }
 ];
 
-db.Questions.remove({})
+db.Questions.deleteMany({})
   .then(() => db.Questions.collection.insertMany(questionSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
@@ -75,7 +75,7 @@ db.Questions.remove({})
     process.exit(1);
   });
 
-db.UserInfo.remove({})
+db.UserInfo.deleteMany({})
   .then(() => db.UserInfo.collection.insertMany(userSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
