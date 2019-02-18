@@ -111,11 +111,7 @@ render() {
           {this.state.notDone ? (
             <Row>
               <Col size="md-12">
-              
-                <Jumbotron>
-                  <h1>Study Buddy</h1>
-                  <h3>Answer the questions!</h3>
-                </Jumbotron>
+              <h1 className="createIntro">CardSet #1!</h1>
                 <Score 
                 correct={this.state.correct}
                 wrong={this.state.wrong}
@@ -133,11 +129,11 @@ render() {
                     question={i.question}
                     >
                     </QuestionCard>
-                      <input key={i._id+"Input"} style={{borderRadius:"5%"}} placeholder="Answer Question" ref={this.userAnswer} />
+                      <input className="answerInput" key={i._id+"Input"} placeholder="Answer" ref={this.userAnswer} />
                     <FormBtn
                       key={i._id+"Button"}
                       onClick={()=>this.checkAnswer(this.userAnswer.current.value, i.answer, i._id)}
-                      >Answer
+                      >Submit <i class="fas fa-check-circle"></i>
                     </FormBtn>
                   </Animated>
                   </div>
@@ -153,7 +149,7 @@ render() {
                   <Animated animationIn="wobble" animationOut="wobble" isVisible={false}>
                     <QuestionCard 
                     key={i._id+"questionCard"}
-                    question={"The correct answer is " +i.answer}
+                    question={"The correct answer was " +i.answer}
                     >
                     </QuestionCard>
                   </Animated>
@@ -176,22 +172,20 @@ render() {
             <Row>
               <Col size="md-12">
               
-                <Jumbotron>
-                  <h1>Study Buddy</h1>
-                  <h3>Answer the questions!</h3>
-                </Jumbotron>
+                  <h3 className="createIntro">Answer the questions!</h3>
+                
                 <Score 
                 correct={this.state.correct}
                 wrong={this.state.wrong}
                 />
-                <h1>Done</h1>
+                <h1 className="createIntro">Card Set Completed!</h1>
                 <DoneSound />  
               </Col>
             </Row>
           
 
           
-          )} </div> ) : (<Jumbotron><h1>Please Log In!</h1></Jumbotron>))}
+          )} </div> ) : (<h1 className="createIntro">Please Log In!</h1>))}
 
 
 

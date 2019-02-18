@@ -21,8 +21,8 @@ class LoginForm extends Component {
           const { currentUser, logIn, logOut } = value;
           return currentUser ? (
             <span style={{paddingRight: "10px"}}>
-              <span style={{padding: "0 10px", fontSize:"25px" }}> {currentUser}</span>
-              <button className="btn-primary" onClick={logOut}>Log Out</button>
+              <span className="loggedInUser">Logged In As, {currentUser}</span>
+              <button className="btn-primary" onClick={logOut}>Log Out <i class="fas fa-sign-out-alt"></i></button>
             </span>
           ) : (
             <div>
@@ -36,7 +36,7 @@ class LoginForm extends Component {
                     logIn(this.userInput.current.value, this.passwordInput.current.value);
                   }}
                 >
-                  Log In
+                 Log In <i class="fas fa-arrow-alt-circle-right"></i>
                 </button>
               </form>
             </div>
