@@ -6,6 +6,7 @@ import { QuestionList, QuestionListItem } from "../components/QuestionList";
 import { Input, FormBtn } from "../components/Form";
 import { Provider, MyContext } from "../MyContext";
 import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 class Questions extends Component {
   constructor(props) {
@@ -90,18 +91,20 @@ class Questions extends Component {
               {({ currentUser }) => (
                 <h1 className="createIntro">
                   {currentUser
-                    ? `Welcome, ${currentUser}! \nAdd Questions Below`
+                    ? `Welcome, ${currentUser}!`
                     : "Please Log In!"}
                 </h1>
               )}
             </MyContext.Consumer>
           </Col>
+          <Footer></Footer>
         </Row>
         <MyContext.Consumer>
           {({ auth, currentId }) =>
             auth ? (
               <Row>
                 <Col size="md-12">
+                <p className="addToSet">Add a new card to the set</p>
                   <form>
                     <Input
                       value={this.state.answer}
@@ -120,7 +123,7 @@ class Questions extends Component {
                       disabled={!this.state.question || !this.state.answer}
                       onClick={() => this.handleQuestion(currentId)}
                     >
-                      Submit
+                      Submit <i class="fas fa-check-circle"></i>
                     </FormBtn>
                   </form>
                 </Col>
@@ -141,8 +144,11 @@ class Questions extends Component {
                   ) : (
                     <h3 className="createIntro">No Questions Entered Yet!</h3>
                   )}
+                  
                 </Col>
+                <Footer></Footer>
               </Row>
+              
             ) : (
               <h2 />
             )

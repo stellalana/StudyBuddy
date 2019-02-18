@@ -1,12 +1,12 @@
 .btn-success {
-    margin:0 auto;
+    margin: auto;
     display:block;
-    margin-top: 5px;
+    margin-top: 10px;
     background-color:  #ACD0B6 !important;
     border-style: solid;
     border-color: #40676E !important;
     color: #40676E !important;
-    
+    bottom: 50px;
 }
 .btn-success:hover {
     margin:0 auto;

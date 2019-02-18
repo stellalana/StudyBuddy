@@ -14,7 +14,8 @@ body {
 .createIntro {
   text-align: center;
   font-family: 'Merriweather', serif;
-  margin-top: 25px;
+  margin-top: 50px;
+  margin-bottom: 40px;
   color: #40676E;
 }
 .col-cardsets {
@@ -38,6 +39,18 @@ body {
 /* .description {
   display: inline block;
 } */
+.addToSet {
+  font-size: 28px;
+  color: #76A8BC;
+  margin-top: 5px;
+  font-family: 'Fjalla One', sans-serif;
+  text-align: center;
+  text-shadow:
+		-1px -1px 0 #40676E,
+		1px -1px 0 #40676E,
+		-1px 1px 0 #40676E,
+		1px 1px 0 #40676E;
+}
 
 .headerTerm, .headerDefinition {
   font-size: 12px;
@@ -91,9 +104,13 @@ body {
 .sbDescription {
   width: 40%;
   float: right;
-  margin-right: 100px;
-  margin-top: 50px;
+  margin-right: 5%;
   margin-bottom: 200px;
+  margin-top: 4%;
+}
+.exampleCard {
+  margin-left: 5%;
+  float: left;
 }
 
 /* navbar */
@@ -117,6 +134,7 @@ a:hover {
   color: #40676E;
   font-family: 'PT Serif', serif;
   font-weight: bold;
+  font-size: 16px;
 }
 .btn-primary:hover {
   background-color: #40676E;
@@ -162,7 +180,9 @@ a:hover {
 .scoreBoard {
   border-style: solid;
   border-radius: 5px;
-  border-color: #40676E;
+  border-color: #76A8BC;
+  background-color: #76A8BC;
+  color: #40676E;
   border-width: 2px;
   width: 550px;
   margin: 0 auto;
@@ -172,4 +192,14 @@ a:hover {
 .navbar {
   font-family: 'Merriweather', serif !important;
   font-size: 20px;
+}
+
+/* 404 Page */
+.page404 {
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Merriweather', serif !important;
+  font-size: 60px;
+  margin-top: 20%;
+  color: #40676E;
 }

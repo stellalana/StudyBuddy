@@ -2,15 +2,41 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
 import { MyContext } from "../MyContext";
+import QuestionCard from "../components/QuestionCard";
 import Nav from "../components/Nav";
+import API from "../utils/API";
+import Footer from "../components/Footer";
 
 class Homepage extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
+    this.userAnswer = React.createRef();
+    this.state = {
+      allQuestions: [],
+      shuffledQuestions: [],
+      question: "",
+      answer: "",
+      correct: 0,
+      wrong: 0,
+      notDone: true,
+      rightScreen: true,
+      correctSound: false
+    };
   }
 
+  componentDidMount() {
+    API.getQuestions()
+      .then(res => this.setState({ allQuestions: res.data }))
+      .then(() => console.log(this.state.allQuestions));
+  }
+
+  shuffle = a => {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
   render() {
     return (
       <Container fluid>
@@ -22,16 +48,32 @@ class Homepage extends Component {
               <h3 className="jumboSlogan">The Best Way To Learn!</h3>
             </Jumbotron>
             <span>
+              <div className="quesWrap">
+                {this.shuffle(this.state.allQuestions)
+                  .filter(i => i.active !== false)
+                  .slice(0, 1)
+                  .map(i => (
+                    <div className="exampleCard" key={i._id + "div"}>
+                      <QuestionCard
+                        key={i._id + "questionCard"}
+                        question={i.question}
+                      />
+                    </div>
+                  ))}
+              </div>
               <p className="sbDescription">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Study Buddy is the easiest way to practice and master what you’re
+                learning. Create your own flashcards and study sets or choose
+                a set already created by one of our many users — it’s up to you.
+                <br></br><br></br>
+                With Study Buddy you can:<br></br>
+                - Put your memory to the test<br></br>
+                - Easily prepare for test-day<br></br>
+                - Share flashcards with classmates (if you're a student)<br></br>
+                - Or your students (if you're a teacher)
               </p>
             </span>
+            <Footer></Footer>
           </Col>
         </Row>
       </Container>

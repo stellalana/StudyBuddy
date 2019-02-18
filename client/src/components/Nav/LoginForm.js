@@ -21,7 +21,7 @@ class LoginForm extends Component {
           const { currentUser, logIn, logOut } = value;
           return currentUser ? (
             <span style={{paddingRight: "10px"}}>
-              <span className="loggedInUser">Logged In As, {currentUser}</span>
+              <span className="loggedInUser">Logged in as, {currentUser}</span>
               <button className="btn-primary" onClick={logOut}>Log Out <i class="fas fa-sign-out-alt"></i></button>
             </span>
           ) : (

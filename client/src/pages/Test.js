@@ -9,6 +9,7 @@ import Score from "../components/Score";
 import {Animated} from "react-animated-css";
 import Nav from "../components/Nav";
 import { ShuffleSound, FailSound, BellSound, DoneSound } from "../components/Sounds";
+import Footer from "../components/Footer";
 
 
 class Test extends Component {
@@ -164,9 +165,7 @@ render() {
 
 
               </Col>
-              <Col size="md-12 sm-12">
-            
-              </Col>
+              <Footer></Footer>
             </Row>  /////////////////////////////////////////////GAME SUMMARY RENDER/////////////////////////////////////////////
           ) : (  
             <Row>
@@ -185,7 +184,13 @@ render() {
           
 
           
-          )} </div> ) : (<h1 className="createIntro">Please Log In!</h1>))}
+          )} </div> ) : (<Row>
+            <Col size="md-12">
+            
+            <h1 className="createIntro">Please Log In!</h1>
+            </Col>
+            <Footer></Footer>
+          </Row>))}
 
 
 
