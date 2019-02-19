@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { MyContext } from "../../MyContext";
+import { Input, FormBtn } from "../Form"
 import "./style.css";
 
 
@@ -7,12 +8,16 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
 
-    this.userInput = React.createRef();
-    this.passwordInput = React.createRef();
-
-    this.state = {};
+    this.state = {
+      userName: "",
+      userPassword:""
+    };
   }
 
+  handleInputChange = event => {
+    const { target: { name, value } } = event
+    this.setState({ [name]: value, event: event })
+  }
 
   render() {
     return (
@@ -25,20 +30,31 @@ class LoginForm extends Component {
               <button className="btn-primary" onClick={logOut}>Log Out</button>
             </span>
           ) : (
-            <div>
-              <form style={{paddingRight: "10px"}}
+            <div style={{width:"500px"}}>
+              <form
               >
-                <input style={{borderRadius:"5%"}} placeholder="Username" ref={this.userInput} />
-                <input style={{borderRadius:"5%"}} placeholder="Password" ref={this.passwordInput} />
-                <button
-                   className="btn-primary" 
-                  onClick={() => {
-                    logIn(this.userInput.current.value, this.passwordInput.current.value);
-                  }}
-                >
-                  Log In
-                </button>
+                <input className="form-control" style={{float:"left", width:"200px", margin:"10px 0"}}
+                value={this.state.userName}
+                onChange={this.handleInputChange}
+                name="userName"
+                placeholder="Username"
+              />
+              <input className="form-control" style={{float:"left", width:"200px", margin:"10px 2.5px"}}
+                value={this.state.userPassword}
+                onChange={this.handleInputChange}
+                name="userPassword"
+                placeholder="Password"
+                type="password"
+              />
               </form>
+              <button className="btn" id="loginButton" style={{display:"flex", alignItems:"flex-start"}}
+                disabled={!(this.state.userName) || !(this.state.userPassword)}
+                onClick={() => {
+                  logIn(this.state.userName, this.state.userPassword);
+                }}
+              >
+                Submit
+              </button>
             </div>
           );
         }}

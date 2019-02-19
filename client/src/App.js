@@ -6,6 +6,7 @@ import Test from "./pages/Test";
 import Landing from "./pages/Landing";
 import NoMatch from "./pages/NoMatch";
 import Homepage from "./pages/Homepage";
+import Register from "./pages/Register";
 
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
             <Route exact path="/" component={Homepage} />
             <Route exact path="/getQuestions" component={GetQuestions} />
             <Route exact path="/test" component={Test} />
+            <Route exact path="/register" component={Register} />
             <Route component={NoMatch} />
           </Switch>
         </div>

@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component  } from "react";
 import API from "./utils/API";
+
 
 
 const MyContext = React.createContext();
@@ -21,6 +22,7 @@ class Provider extends Component {
     this.userInfo();
   }
 
+  
 
   userInfo = () => {
     var allNames = [];
@@ -37,6 +39,7 @@ class Provider extends Component {
       .then(this.setState({ userNames:allNames, passwords: allPasswords, userIds:userids}))
       .then(()=> console.log(this.state)) ///comment out when done!!!!!!!!!!!!!!11
       .catch(err => console.log(err));
+      
     };
 
 
@@ -50,28 +53,17 @@ class Provider extends Component {
     }
     else {
       console.log("invalid password");
+      alert("Invalid Password or Username. Please try again or register")
     }
-    console.log(this.state);
+    
   };
 
   logOut = () => {
     console.log(this.state);
-    this.setState({ currentUser: null, password: null, auth: false });}
+    this.setState({ currentUser: null, password: null, auth: false });
+  }
 
-  handleQuestion=(question, answer)=> {
-    console.log(this.state.currentId);
-      const sendIt = {
-        question: question,
-        answer: answer
-      };
-      var tempID = "5c5ecc4c2aac9312fcb3f439"
-      API.saveQuestion(sendIt)
-      //.then(res => console.log(res.data._id))
-      //.then(res=>API.updateUserQuestion(tempID, {questions:res.data._id})) //FINISH TO UPDATE USER WITH ID FOR QUESTION
-      .then(this.setState({ question:"", answer: ""}))
-      .then(res =>API.getQuestions().then(res => this.setState({ allQuestions : res.data })))
-      .catch(err => console.log(err));
-    }
+
   
   render() {
     return (
@@ -91,5 +83,6 @@ class Provider extends Component {
     );
   }
 }
+
 
 export { Provider, MyContext };

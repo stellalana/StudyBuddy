@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import QuestionCard from "../components/QuestionCard";
-import { Provider, MyContext } from "../MyContext";
+import { MyContext } from "../MyContext";
 import { FormBtn } from "../components/Form";
 import Score from "../components/Score";
 import {Animated} from "react-animated-css";
 import Nav from "../components/Nav";
+import { Redirect } from 'react-router';
 
 
 class Test extends Component {
@@ -16,11 +16,8 @@ class Test extends Component {
 
   this.userAnswer = React.createRef();
 
-
-  
   this.state = {
     allQuestions: [],
-    shuffledQuestions: [],
     question: "",
     answer: "",
     correct: 0,
@@ -31,7 +28,7 @@ class Test extends Component {
 }
 
 componentDidMount() {
-    API.getQuestions().then(res => this.setState({ allQuestions : res.data }))
+    API.getUser(this.context.currentId).then(res => this.setState({ allQuestions : res.data.questions }))
     .then(()=>console.log(this.state.allQuestions))
 }
 
@@ -46,7 +43,7 @@ shuffle = (a) => {
 checkAnswer = (userAnswer, correctAnswer, id) => {
   let where;
   let whereWrong;
-   if (userAnswer === correctAnswer) {
+   if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
      console.log("Correct!")
      for (var i = 0; i < this.state.allQuestions.length; i++) {
        if (id === this.state.allQuestions[i]._id) {
@@ -96,6 +93,11 @@ wrongAnswer = (question, answer, id) => {
 
 }
 
+restartGame = () => {
+  API.getUser(this.context.currentId)
+  .then(res => this.setState({ allQuestions : res.data.questions, question:"", answer:"", correct:0, wrong:0, notDone:true, rightScreen:true }))
+}
+
 render() {
     return (
       <Container fluid>
@@ -109,29 +111,25 @@ render() {
           {this.state.notDone ? (
             <Row>
               <Col size="md-12">
-              
-                <Jumbotron>
-                  <h1>Study Buddy</h1>
-                  <h3>Answer the questions!</h3>
-                </Jumbotron>
                 <Score 
                 correct={this.state.correct}
                 wrong={this.state.wrong}
+                restartGame = {this.restartGame}
                 />
 
               {this.state.rightScreen ? (    
 
                 <div className="quesWrap">
                   {this.shuffle(this.state.allQuestions).filter(i=>i.active !== false).slice(0, 1).map(i=> (
-                  <div className="questionCard" key={i._id+"div"}>
+                  <div className="questionCard" style={{width:"600px", margin:"10px auto"}} key={i._id+"div"}>
                   <Animated animationIn="bounceInRight" animationOut="wobble" isVisible={true}>
-                    <QuestionCard 
+                    <QuestionCard
                     key={i._id+"questionCard"}
                     question={i.question}
                     >
                     </QuestionCard>
-                      <input key={i._id+"Input"} style={{borderRadius:"5%"}} placeholder="Answer Question" ref={this.userAnswer} />
-                    <FormBtn
+                      <input key={i._id+"Input"} style={{borderRadius:"5%", margin: "20px 0 20px 200px"}} placeholder="Answer Question" ref={this.userAnswer} />
+                    <FormBtn 
                       key={i._id+"Button"}
                       onClick={()=>this.checkAnswer(this.userAnswer.current.value, i.answer, i._id)}
                       >Answer
@@ -171,11 +169,6 @@ render() {
           ) : (  
             <Row>
               <Col size="md-12">
-              
-                <Jumbotron>
-                  <h1>Study Buddy</h1>
-                  <h3>Answer the questions!</h3>
-                </Jumbotron>
                 <Score 
                 correct={this.state.correct}
                 wrong={this.state.wrong}
@@ -184,20 +177,13 @@ render() {
               </Col>
             </Row>
           
-
           
-          )} </div> ) : (<Jumbotron><h1>Please Log In!</h1></Jumbotron>))}
-
-
-
-
-
-
+          )} </div> ) : (<Redirect to="/"/>))}
 
         </MyContext.Consumer>
       </Container>
     );
   }
 }
-
+Test.contextType = MyContext;
 export default Test;
