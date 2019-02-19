@@ -150,7 +150,7 @@ render() {
                   <Animated animationIn="wobble" animationOut="wobble" isVisible={false}>
                     <QuestionCard 
                     key={i._id+"questionCard"}
-                    question={"The correct answer was " +i.answer}
+                    question={"The correct answer was, " + '"' +i.answer + '"'}
                     >
                     </QuestionCard>
                   </Animated>

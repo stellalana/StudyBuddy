@@ -62,18 +62,20 @@ class Homepage extends Component {
                   ))}
               </div>
               <p className="sbDescription">
-                Study Buddy is the easiest way to practice and master what you’re
-                learning. Create your own flashcards and study sets or choose
-                a set already created by one of our many users — it’s up to you.
-                <br></br><br></br>
-                With Study Buddy you can:<br></br>
-                - Put your memory to the test<br></br>
-                - Easily prepare for test-day<br></br>
-                - Share flashcards with classmates (if you're a student)<br></br>
-                - Or your students (if you're a teacher)
+                <h1 className="whyStudy">Why Study Buddy?</h1>
+                Study Buddy is the easiest way to practice and master what
+                you’re learning. Create your own flashcards and study sets or
+                choose a set already created by one of our many users — it’s up
+                to you.
+                <br />
+                <br />
+                With Study Buddy you can:<br />- Put your memory to the test
+                <br />- Easily prepare for an upcoming exam<br />- Share
+                flashcards with classmates (if you're a student)<br />- Or your
+                students (if you're a teacher)
               </p>
             </span>
-            <Footer></Footer>
+            <Footer />
           </Col>
         </Row>
       </Container>

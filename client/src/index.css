@@ -106,13 +106,30 @@ body {
   float: right;
   margin-right: 5%;
   margin-bottom: 200px;
-  margin-top: 4%;
+  margin-top: 2%;
+  font-weight: bold;
+  color: #40676E;
 }
 .exampleCard {
   margin-left: 5%;
   float: left;
 }
-
+.whyStudy {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #76A8BC;
+  font-weight: bold !important;
+  border-bottom: solid;
+  padding-bottom: 7px;
+  width: 48%;
+  margin-left: 0;
+  letter-spacing: 2px;
+  text-shadow:
+		-1px -1px 0 #40676E,
+		1px -1px 0 #40676E,
+		-1px 1px 0 #40676E,
+		1px 1px 0 #40676E;
+}
 /* navbar */
 
 a { 
@@ -161,6 +178,11 @@ a:hover {
 .img-container {
   height: 500px !important;
 }
+.cardText {
+  padding: 10px;
+  font-size: 28px;
+  color:#40676E;
+}
 
 .answerInput {
   border-style: solid;
@@ -172,7 +194,7 @@ a:hover {
   padding-left: 10px !important;
   margin: 0 auto;
   display: block;
-  width: 300px;
+  width: 550px;
   height: 40px;
   font-size: 20px;
 }
