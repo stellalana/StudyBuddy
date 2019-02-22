@@ -3,26 +3,27 @@ import { Provider } from "./MyContext";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GetQuestions from "./pages/GetQuestions";
 import Test from "./pages/Test";
+import Landing from "./pages/Landing";
 import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
+import Homepage from "./pages/Homepage";
 
 
 class App extends Component {
   render() {
     return (
+      <Provider>
       <Router>
         <div>
-        <Provider>
-            <Nav />
-        </Provider>
           <Switch>
-            <Route exact path="/" component={NoMatch} />
+
+            <Route exact path="/" component={Homepage} />
             <Route exact path="/getQuestions" component={GetQuestions} />
             <Route exact path="/test" component={Test} />
             <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>
+      </Provider>
     );
   }
 }

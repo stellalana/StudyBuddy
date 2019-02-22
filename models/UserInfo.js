@@ -6,6 +6,7 @@ var UserSchema = new Schema ({
     userName: {
         type: String,
         required: true,
+        unique : false
     },
     password: {
         type: String,
@@ -23,7 +24,6 @@ var UserSchema = new Schema ({
         type: Boolean,
         default: false
     },
-    
     createDate: {
         type: Date,
         default: Date.now

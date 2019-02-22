@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
-import { BookList, BookListItem } from "../components/Booklist";
+import { QuestionList, QuestionListItem } from "../components/QuestionList";
 import { Input, FormBtn } from "../components/Form";
 import { Provider, MyContext } from "../MyContext";
+import Nav from "../components/Nav";
 
 
-class Books extends Component {
+class Questions extends Component {
   constructor(props) {
     super(props);
   
@@ -19,6 +20,7 @@ class Books extends Component {
     answer: ""
   };
 }
+
 
   componentDidMount() {
     API.getQuestions().then(res => this.setState({ allQuestions : res.data }))
@@ -74,51 +76,65 @@ class Books extends Component {
 
   render() {
     return (
+    
       <Container fluid>
+      <Nav />
         <Row>
           <Col size="md-12">
       
-            <Jumbotron>
-              <h1>Study Buddy</h1>
-              <h3>Enter A Question!</h3>
-            </Jumbotron>
+            <MyContext.Consumer>
+              {({ currentUser }) => (
+                <h1 className="createIntro">
+                  {currentUser ? `Welcome, ${currentUser}, \nCreate a Flash Card Below!` : "Please Log In!"}
+                </h1>
+                
+              )}
+            </MyContext.Consumer>
+            
+          </Col>
+        </Row>
+          <MyContext.Consumer>
+              {({ auth, currentId }) => (
+                auth ? (
+          <Row>
+           <Col size="md-12">  
+            
+           
+
+
             <form>
               <Input
                 value={this.state.question}
                 onChange={this.handleInputChange}
                 name="question"
-                placeholder="Question (required)"
+                placeholder="Term"
               />
               <Input
                 value={this.state.answer}
                 onChange={this.handleInputChange}
                 name="answer"
-                placeholder="Answer (required)"
+                placeholder="Definition"
               />
       
-              <Provider>
-              <MyContext.Consumer>
-              {({ currentId }) => (
-               <FormBtn
-               disabled={!(this.state.question) || !(this.state.answer)}
-               onClick={()=>this.handleQuestion(currentId)}
-             >
-               Submit
-             </FormBtn>
-              )}
-            </MyContext.Consumer>
-            </Provider>
-              
-    
-
+                <FormBtn
+                disabled={!(this.state.question) || !(this.state.answer)}
+                onClick={()=>this.handleQuestion(currentId)}
+              >
+                Submit
+              </FormBtn>
+                
             </form>
+
+            
+            
           </Col>
+         
           <Col size="md-12 sm-12">
             {this.state.allQuestions.length ? (
-              <BookList>
+              <QuestionList>
               {this.state.allQuestions.map(ques=> (
               
-                <BookListItem
+                <QuestionListItem
                   key = {ques._id}
                   id = {ques._id}
                   answer = {ques.answer}
@@ -128,15 +144,28 @@ class Books extends Component {
                 
                 )
                 )}
-            </BookList>
+            </QuestionList>
             ) : (
               <h3>No Questions Entered Yet!</h3>
             )}
-          </Col>
-        </Row>
-      </Container>
-    );
+           </Col>
+          </Row>
+           ) : (<h2></h2>))}
+            
+           </MyContext.Consumer>
+       
+      
+     
+      
+
+
+
+
+
+
+        </Container>
+    )
   }
 }
 
-export default Books;
+export default Questions;
